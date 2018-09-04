@@ -3,7 +3,7 @@
 
 '''
 @file 
-@brief pubg APIからtelemonyファイルを取得するスクリプト (アカウントIDで検索かけるメッソドもおまけ)
+@brief pubg APIからtelemetryファイルを取得するスクリプト (アカウントIDで検索かけるメッソドもおまけ)
 @date 2018-09-04
 '''
 
@@ -50,11 +50,11 @@ def request_accountInfo(playername_list):
     return return_obj
 
 '''
-検索したいマッチIDを受け取って対応するtelemony.jsonのURLを返す
+検索したいマッチIDを受け取って対応するtelemetry.jsonのURLを返す
 @params {string} 検索したいマッチのID
-@return {object} telemony.jsonが取れるURL
+@return {object} telemetry.jsonが取れるURL
 '''
-def request_matchTelemony(matchID):
+def request_matchTelemetry(matchID):
     # リクエスト準備
     headers = {
         "Authorization" : "Bearer "+ API_KEY,
@@ -67,15 +67,15 @@ def request_matchTelemony(matchID):
     res_json = json.loads(res.text)
 
     # parse処理
-    telemony_URL = [x['attributes']["URL"] for x in res_json['included'] if x['type'] == 'asset']
-    return telemony_URL
+    telemetry_URL = [x['attributes']["URL"] for x in res_json['included'] if x['type'] == 'asset']
+    return telemetry_URL
 
 
 # テスト用のメイン処理
 if __name__ == '__main__' :
     accountInfo = request_accountInfo(["yobiyobi","nicky_pon"])
     print(accountInfo)
-    telemonyURL = request_matchTelemony(accountInfo["yobiyobi"]["matchIDs"][0])
-    print (telemonyURL)
+    telemetryURL = request_matchTelemetry(accountInfo["yobiyobi"]["matchIDs"][0])
+    print (telemetryURL)
         
     
