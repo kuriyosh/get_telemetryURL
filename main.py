@@ -71,7 +71,7 @@ def request_matchTelemony(matchID):
     return telemony_URL
 
 
-# テスト用に
+# テスト用のメイン処理
 if __name__ == '__main__' :
     accountInfo = request_accountInfo(["yobiyobi","nicky_pon"])
     print(accountInfo)
